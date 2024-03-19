@@ -66,3 +66,42 @@ def mcd(a, b):
     while b != 0:
         a, b = b, a % b
     return a
+    def mcm(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+------
+def numero_a_letra(numero):
+    conversion = {10: 'a', 11: 'b', 12: 'c', 13: 'd', 14: 'e', 15: 'f', 16: 'g'}
+    return conversion.get(numero, '')
+
+def decimal(numero, base):
+    if base < 2 or base > 16:
+        print("Base no válida. Debe estar entre 2 y 16.")
+        return
+
+    resultado = ""
+    while numero > 0:
+        digit = numero % base
+        # Convertir el dígito a letra si es necesario
+        if digit >= 10:
+            digit = numero_a_letra(digit)
+        resultado = str(digit) + resultado
+        numero //= base
+
+    return resultado
+
+def main():
+    try:
+        decimal_numero = int(input("Ingresa un número decimal: "))
+        base_eleccion = int(input("Elige una base (2-16): "))
+
+        base_resultado = decimal(decimal_numero, base_eleccion)
+        print(f"El número {decimal_numero} en base {base_eleccion} es: {base_resultado}")
+
+    except ValueError:
+        print("Ingresa un número decimal válido.")
+
+if _name_ == "_main_":
+    main()
+--------------------
