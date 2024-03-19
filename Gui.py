@@ -1,7 +1,6 @@
-from flet import *
 import flet as ft
 import Model
-import time
+
 
 
 def main(page: ft.Page):
@@ -127,7 +126,6 @@ def main(page: ft.Page):
             else:
                 page.clean()
                 divisors = Model.voidGetDiv(int(number),2,3)
-                isPrime = Model.voidGetDiv(int(number),2,4)
                 page.add(ft.Container(
                     ft.Row(
                         [
@@ -235,6 +233,35 @@ def main(page: ft.Page):
                 border_radius=100
                 )
             )
+                
+    def btn_clickMCDIndex2(e):
+        if not txt_Index.value:
+            txt_Index.error_text = "Please enter a number "
+            page.update()
+        else: 
+            Index = txt_Index.value
+            page.route = "/DivisorsIndex2"
+            number = txt_number.value
+            check = Model.isNumber(Index)
+            if check == False:
+                txt_number.error_text = "Please enter a valid number"
+                page.update()
+            else:
+                page.clean()
+                page.add(ft.Container(
+                    ft.Row(
+                        [
+                            ft.Text(f"The Maximum Divisor in common between {number} and {Index} is {Model.mcd(int(number),int(Index))}",size=35,bgcolor=black),
+                        ],
+                        alignment=ft.MainAxisAlignment.CENTER
+                    ),
+                alignment=ft.alignment.center_right,
+                width=1000,
+                height=250,
+                bgcolor= "#522e31",
+                border_radius=100
+                )
+            )
 
     
     def btn_clickReturn(e):
@@ -255,7 +282,7 @@ def main(page: ft.Page):
             else:
                 page.clean()
                 divisors = Model.voidFindPrimeNum(int(number))
-                if divisors:
+                if divisors == True:
                     page.add(ft.Container(
                         ft.Row(
                             [
@@ -283,6 +310,41 @@ def main(page: ft.Page):
                     height=250,
                     bgcolor= "#856e4b",
                     border_radius=100
+                )
+            )
+
+    def btn_clickMcdIndex(e):
+        if not txt_number.value:
+            txt_number.error_text = "Please enter a number "
+            page.update()
+        else: 
+            number = txt_number.value
+            page.route = "/DivisorsIndex"
+            check = Model.isNumber(number)
+            if check == False:
+                txt_number.error_text = "Please enter a valid number"
+                page.update()
+            else:
+                page.clean()
+                page.add(ft.Container(ft.Row(
+                [
+                    ft.Text(f"Chose the second number of the MCD",size=25,bgcolor=black),
+                
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                ),
+                alignment=ft.alignment.center_right,
+                width=800,
+                height=150,
+                bgcolor= "#a6d5d0",
+                border_radius=100,
+            ),
+                txt_Index,
+                ft.Row(
+                    [
+                     ft.ElevatedButton("Get the result", on_click=btn_clickMCDIndex2),
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER,
                 )
             )
         
@@ -333,7 +395,8 @@ def main(page: ft.Page):
             ft.Row(
                 [
                     ft.ElevatedButton("Convert a number to any base", on_click=btn_clickAnyToDec),
-                    ft.ElevatedButton("Is Prime", on_click=btn_clickIsPrime)
+                    ft.ElevatedButton("Is Prime", on_click=btn_clickIsPrime),
+                    ft.ElevatedButton("MCD", on_click=btn_clickMcdIndex),
                 ],
                 alignment=ft.MainAxisAlignment.CENTER,
             ),
@@ -351,4 +414,3 @@ def main(page: ft.Page):
         
 
 execute = ft.app(target=main)
-
