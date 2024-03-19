@@ -66,3 +66,21 @@ def mcd(a, b):
     while b != 0:
         a, b = b, a % b
     return a
+    def mcm(a, b):
+    while b:
+        a, b = b, a % b
+    return 
+
+def decimal(numero, base):
+
+    if base < 2 or base > 16:
+        print("Base no válida. Debe estar entre 2 y 16.")
+        return
+
+    resultado = ""
+    while numero > 0:
+        digit = numero % base
+        resultado = str(digit) + resultado
+        numero //= base
+
+    return resultado
