@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import math as m
 import View
 
@@ -62,3 +61,8 @@ def isNumber(number:object):
 def anyBaseTodecimal(number: int, sistem:int):
     while number>=sistem:
         pass
+
+def mcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
